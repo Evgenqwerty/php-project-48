@@ -5,15 +5,18 @@ require __DIR__ . '/../vendor/autoload.php';
 use Docopt\Handler;
 
 $doc = <<<DOC
-gendiff cli tool
+gendiff cli tool Generate diff
 
 Usage:
   cli.php [options] <file> [--output=<output>]
   cli.php -h | --help
+  gendiff (-v|--version)
+
 
 Options:
   -h --help            Show this screen.
   --output=<output>    Output file [default: out.txt].
+  -v --version         Show version
 DOC;
 
 $handler = new Handler();
