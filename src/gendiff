@@ -8,15 +8,14 @@ $doc = <<<DOC
 gendiff cli tool Generate diff
 
 Usage:
-  cli.php [options] <file> [--output=<output>]
-  cli.php -h | --help
+  gendiff (-h|--help)
   gendiff (-v|--version)
-
+  gendiff [--format=<fmt>] <firstFile> <secondFile> [--output=<output>]
 
 Options:
-  -h --help            Show this screen.
-  --output=<output>    Output file [default: out.txt].
-  -v --version         Show version
+  -h --help             Show this screen.
+  -v --version          Show version.
+  --format=<fmt>        Output format (plain, json, stylish) [default: stylish].
 DOC;
 
 $handler = new Handler();
@@ -26,4 +25,20 @@ $args = $handler->handle($doc);
 if ($args['--help'] || $args['-h']) {
     echo $doc;
     exit(0);
+}
+
+// Вывод версии
+if ($args['--version'] || $args['-v']) {
+    echo "Gendiff Version: 0.1 \n";
+    exit(0);
+}
+
+// Основная логика
+if (isset($args['<firstFile>']) && isset($args['<secondFile>'])) {
+    echo "Comparing files: {$args['<firstFile>']} and {$args['<secondFile>']}\n";
+    echo "Format: {$args['--format']}\n";
+    echo "Output: {$args['--output']}\n";
+} else {
+    echo "Error: You must specify two files.\n";
+    exit(1);
 }
