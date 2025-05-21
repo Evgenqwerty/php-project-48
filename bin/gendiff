@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/../vendor/autoload.php';
+
+use Docopt\Handler;
+use function Differ\Parser\parser;
+
+const DOC = <<<DOC
+gendiff cli tool Generate diff
+
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff [--format=<fmt>] <firstFile> <secondFile> 
+
+Options:
+  -h --help             Show this screen.
+  -v --version          Show version.
+  --format=<fmt>        Output format (plain, json, stylish) [default: stylish].
+
+DOC;
+
+$args = Docopt::handle(DOC, array('version' => '1.0'));
+
+if (isset($args['<firstFile>']) && isset($args['<secondFile>']))
+{
+    $res1 = parser($args['<firstFile>']);
+    $res2 = parser($args['<secondFile>']);
+    print_r($res1);
+    print_r($res2);
+}
+
+
+
+
