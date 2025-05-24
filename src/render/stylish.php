@@ -12,7 +12,7 @@ function stylish($array)
     $initialString = '{' . "\n";
     $bodyDiff =  getBody($array);
     $endString = "\n" . '}';
-    return "{$initialString}{$bodyDiff}{$endString}\n";
+    return "{$initialString}{$bodyDiff}{$endString}";
 }
 
 function getBody($array, $depth = 0)

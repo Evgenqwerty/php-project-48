@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="3.13.0">
+<file name="/home/evgeniy/php-project-48/src/Parser.php">
+ <error line="2" column="1" severity="error" message="Missing file doc comment" source="PEAR.Commenting.FileComment.Missing"/>
+ <error line="5" column="1" severity="error" message="Missing doc comment for function parse()" source="PEAR.Commenting.FunctionComment.Missing"/>
+</file>
+<file name="/home/evgeniy/php-project-48/src/Differ.php">
+ <error line="2" column="1" severity="error" message="Missing file doc comment" source="PEAR.Commenting.FileComment.Missing"/>
+ <error line="8" column="1" severity="error" message="Missing doc comment for function genDiff()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="16" column="1" severity="error" message="Missing doc comment for function makeDiff()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="20" column="12" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+ <error line="23" column="102" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+ <error line="37" column="18" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+ <error line="40" column="1" severity="error" message="Missing doc comment for function buildNode()" source="PEAR.Commenting.FunctionComment.Missing"/>
+</file>
+<file name="/home/evgeniy/php-project-48/src/render/stylish.php">
+ <error line="2" column="1" severity="error" message="Missing file doc comment" source="PEAR.Commenting.FileComment.Missing"/>
+ <error line="10" column="1" severity="error" message="Missing doc comment for function stylish()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="18" column="1" severity="error" message="Missing doc comment for function getBody()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="20" column="17" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+ <error line="22" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="26" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="29" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="32" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="35" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="39" column="10" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+ <error line="43" column="1" severity="error" message="Missing doc comment for function renderArray()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="46" column="18" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+ <error line="50" column="13" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+ <error line="57" column="1" severity="error" message="Missing doc comment for function getIndent()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="64" column="1" severity="error" message="Missing doc comment for function renderNodesRemoved()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="72" column="1" severity="error" message="Missing doc comment for function renderNodesAdded()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="80" column="1" severity="error" message="Missing doc comment for function renderNodesUnchanged()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="88" column="1" severity="error" message="Missing doc comment for function renderNodesNested()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="97" column="1" severity="error" message="Missing doc comment for function getValue()" source="PEAR.Commenting.FunctionComment.Missing"/>
+ <error line="100" column="9" severity="error" message="Line indented incorrectly; expected 4 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="102" column="9" severity="error" message="Line indented incorrectly; expected 4 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="104" column="9" severity="error" message="Line indented incorrectly; expected 4 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+ <error line="106" column="9" severity="error" message="Line indented incorrectly; expected 4 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.IncorrectExact"/>
+</file>
+<file name="/home/evgeniy/php-project-48/src/render/json.php">
+ <error line="2" column="1" severity="error" message="Missing file doc comment" source="PEAR.Commenting.FileComment.Missing"/>
+ <error line="5" column="1" severity="error" message="Missing doc comment for function json()" source="PEAR.Commenting.FunctionComment.Missing"/>
+</file>
+<file name="/home/evgeniy/php-project-48/src/render/render.php">
+ <error line="2" column="1" severity="error" message="Missing file doc comment" source="PEAR.Commenting.FileComment.Missing"/>
+ <error line="9" column="1" severity="error" message="Missing doc comment for function render()" source="PEAR.Commenting.FunctionComment.Missing"/>
+</file>
+</checkstyle>
+
