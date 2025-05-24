@@ -1,5 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Evgenqwerty/php-project-48/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Evgenqwerty/php-project-48/actions)  
+## SonarQube
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Evgenqwerty_php-project-48&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Evgenqwerty_php-project-48)
+## TestCoverage  
+![Coverage](https://img.shields.io/badge/Coverage-{dynamic}-green)
 
 ## About:
 Second project on Hexlet by Ukhvatkin.J.V. Cli tool for watching differences between two files

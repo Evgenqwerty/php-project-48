@@ -1,0 +1,8 @@
+<phpunit>
+    <coverage>
+        <report>
+            <clover outputFile="reports/coverage.xml"/>  <!-- Для SonarQube -->
+            <text outputFile="reports/coverage.txt"/>     <!-- Для парсинга % -->
+        </report>
+    </coverage>
+</phpunit>
