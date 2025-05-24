@@ -1,0 +1,15 @@
+name: Run install, linter and unit-tests after push
+
+on:  
+  push:  
+    branches:  
+      - main
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+    steps:  
+      - name: Checkout code  
+        run: make install
+        run: make lint
+        run: make tests
