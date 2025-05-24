@@ -2,7 +2,7 @@
 
 namespace Differ\Parser;
 
-function parser(string $path)
+function parse(string $path)
 {
     if (!file_exists($path)) {
         throw new \Exception("Invalid file path: {$path}");

@@ -2,7 +2,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-use Docopt\Handler;
+use function Differ\Differ\genDiff;
 use function Differ\Parser\parser;
 
 const DOC = <<<DOC
@@ -20,16 +20,14 @@ Options:
 
 DOC;
 
+
+
 $args = Docopt::handle(DOC, array('version' => '1.0'));
 
-if (isset($args['<firstFile>']) && isset($args['<secondFile>']))
-{
-    $res1 = parser($args['<firstFile>']);
-    $res2 = parser($args['<secondFile>']);
-    print_r($res1);
-    print_r($res2);
-}
+$format = $args['--format'];
+$firstFilePath = realpath($args['<firstFile>']);
+$secondFilePath = realpath($args['<secondFile>']);
 
-
+echo genDiff($firstFilePath, $secondFilePath, $format);
 
 

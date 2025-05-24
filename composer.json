@@ -2,7 +2,13 @@
     "name": "hexlet/code",
     "description": "difference calculator",
     "autoload": {
-        "files":["src/Parser.php"],
+        "files":[
+            "src/Parser.php",
+            "src/Differ.php",
+            "src/render/render.php",
+            "src/render/json.php",
+            "src/render/stylish.php"
+        ],
         "psr-4": {
             "Hexlet\\Code\\": "src/"
         }
