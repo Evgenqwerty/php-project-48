@@ -5,4 +5,13 @@
             <directory suffix=".php">./src</directory>
         </include>
     </source>
+    <coverage>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+            <text outputFile="build/logs/coverage.txt"/>
+        </report>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
 </phpunit>
