@@ -11,12 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup PHP
-          # Action gives to setup the PHP environment to test application
-        # https://github.com/shivammathur/setup-php
+      # Action gives to setup the PHP environment to test application
+      # https://github.com/shivammathur/setup-php
         uses: shivammathur/setup-php@v2
         with:
-          # Specify the PHP version
-          php-version: '8.2'
+     # Specify the PHP version
+          php-version: '7.4'
+      - name: Install
+        # Install project
+        run: make install
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
 
       - name: Install
         run: make install
