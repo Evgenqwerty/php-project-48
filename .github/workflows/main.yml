@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p build/logs/
           XDEBUG_MODE=coverage vendor/bin/phpunit \
-            --coverage-clover=build/logs/clover.xml \
+            --coverage-clover build/logs/clover.xml \
             --coverage-text=build/logs/coverage.txt
 
       - name: SonarCloud Scan
