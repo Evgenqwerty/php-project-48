@@ -8,4 +8,4 @@ tests:
 	composer exec phpunit tests
 
 test-coverage:
-	 XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-filter --coverage-clover=build/logs/clover.xml
+	 XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover=build/logs/clover.xml
