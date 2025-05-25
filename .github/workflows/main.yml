@@ -9,7 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Полная история коммитов
       - name: Setup PHP
       # Action gives to setup the PHP environment to test application
       # https://github.com/shivammathur/setup-php
