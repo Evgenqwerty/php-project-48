@@ -19,6 +19,7 @@ jobs:
         with:
      # Specify the PHP version
           php-version: '8.4'
+          coverage: xdebug
       - name: Install
         # Install project
         run: make install
@@ -44,7 +45,6 @@ jobs:
             -Dsonar.organization=evgenqwerty
             -Dsonar.projectKey=Evgenqwerty_php-project-48
             -Dsonar.sources=./src
-            -Dsonar.tests=./tests
             -Dsonar.php.coverage.reportPaths=reports/coverage.xml
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.analysis.ci.automatic=false
