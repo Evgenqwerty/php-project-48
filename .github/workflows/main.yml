@@ -41,7 +41,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=Evgenqwerty_php-project-48  # Ключ из URL
+            -Dsonar.projectKey=Evgenqwerty_php-project-48
             -Dsonar.sources=./src
             -Dsonar.php.coverage.reportPaths=reports/coverage.xml
             -Dsonar.host.url=https://sonarcloud.io
