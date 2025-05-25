@@ -17,6 +17,7 @@ jobs:
         with:
           # Specify the PHP version
           php-version: '8.2'
+
       - name: Install
         run: make install
 
