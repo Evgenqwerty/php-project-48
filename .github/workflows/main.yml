@@ -42,7 +42,6 @@ jobs:
           SONAR_HOST_URL: https://sonarcloud.io    # URL SonarCloud
         with:
           args: >
-            -Dsonar.analysis.ci.automatic=false
             -Dsonar.projectKey=Evgenqwerty_php-project-48
             -Dsonar.sources=./src
             -Dsonar.php.coverage.reportPaths=reports/coverage.xml
