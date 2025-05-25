@@ -33,7 +33,14 @@ jobs:
       - name: tests
         run: make tests
 
-      - name: Run SonarQube Scan
+      - name: Run SonarCloud Scan
         uses: sonarsource/sonarqube-scan-action@master
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Токен из SonarCloud
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Токен из Secrets
+          SONAR_HOST_URL: https://sonarcloud.io    # URL SonarCloud
+        with:
+          args: >
+            -Dsonar.organization=<NOx>  # Обязательно!
+            -Dsonar.projectKey=<php-project-48>          # Обязательно!
+            -Dsonar.sources=./src                    # Путь к коду
+            -Dsonar.php.coverage.reportPaths=reports/coverage.xml  # Отчёт покрытия
