@@ -42,6 +42,6 @@ jobs:
           SONAR_HOST_URL: https://sonarcloud.io    # URL SonarCloud
         with:
           args: >
-            -Dsonar.projectKey=nox_php-project-48
+            -Dsonar.projectKey=php-project-48
             -Dsonar.sources=./src
             -Dsonar.php.coverage.reportPaths=reports/coverage.xml
