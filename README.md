@@ -19,5 +19,8 @@ cd php-project-48
 composer install
 ```
 
-## Use
+## Use JSON
 [![asciicast](https://asciinema.org/a/f8jvPGXxNNT4b7qbtEWnQ4xco.svg)](https://asciinema.org/a/f8jvPGXxNNT4b7qbtEWnQ4xco)
+
+## Use YAML
+[![asciicast](https://asciinema.org/a/OZJlY2VXzUlMf5cglUi0tbM2P.svg)](https://asciinema.org/a/OZJlY2VXzUlMf5cglUi0tbM2P)
