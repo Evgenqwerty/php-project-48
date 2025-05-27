@@ -24,3 +24,6 @@ composer install
 
 ## Use YAML
 [![asciicast](https://asciinema.org/a/OZJlY2VXzUlMf5cglUi0tbM2P.svg)](https://asciinema.org/a/OZJlY2VXzUlMf5cglUi0tbM2P)
+
+## Use for AST  
+[![asciicast](https://asciinema.org/a/MF8b2xbaI1Q30VKEeEBHCf9KW.svg)](https://asciinema.org/a/MF8b2xbaI1Q30VKEeEBHCf9KW)
