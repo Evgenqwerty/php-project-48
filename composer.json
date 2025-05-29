@@ -5,9 +5,10 @@
         "files":[
             "src/Parser.php",
             "src/Differ.php",
-            "src/render/render.php",
-            "src/render/json.php",
-            "src/render/stylish.php"
+            "src/formatters/render.php",
+            "src/formatters/json.php",
+            "src/formatters/stylish.php",
+            "src/formatters/plain.php"
         ],
         "psr-4": {
             "Hexlet\\Code\\": "src/"

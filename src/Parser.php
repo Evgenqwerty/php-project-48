@@ -21,5 +21,7 @@ function parse(string $path)
             return json_decode($content, true, 512, JSON_THROW_ON_ERROR);
         case "yml":
             return Yaml::parse($content);
+        case "yaml":
+            return Yaml::parse($content);
     }
 }

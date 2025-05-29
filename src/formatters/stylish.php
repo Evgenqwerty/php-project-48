@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Render\Stylish;
+namespace Differ\Formatters\Stylish;
 
 const TAB_SPACE = '    ';
 const ADDED = '  + ';
