@@ -1,0 +1,148 @@
+[
+    {
+        "typeNode": "nested",
+        "key": "common",
+        "oldValue": null,
+        "newValue": null,
+        "children": [
+            {
+                "typeNode": "added",
+                "key": "follow",
+                "oldValue": null,
+                "newValue": false,
+                "children": null
+            },
+            {
+                "typeNode": "unchanged",
+                "key": "setting1",
+                "oldValue": "Value 1",
+                "newValue": "Value 1",
+                "children": null
+            },
+            {
+                "typeNode": "removed",
+                "key": "setting2",
+                "oldValue": 200,
+                "newValue": null,
+                "children": null
+            },
+            {
+                "typeNode": "changed",
+                "key": "setting3",
+                "oldValue": true,
+                "newValue": null,
+                "children": null
+            },
+            {
+                "typeNode": "added",
+                "key": "setting4",
+                "oldValue": null,
+                "newValue": "blah blah",
+                "children": null
+            },
+            {
+                "typeNode": "added",
+                "key": "setting5",
+                "oldValue": null,
+                "newValue": {
+                    "key5": "value5"
+                },
+                "children": null
+            },
+            {
+                "typeNode": "nested",
+                "key": "setting6",
+                "oldValue": null,
+                "newValue": null,
+                "children": [
+                    {
+                        "typeNode": "nested",
+                        "key": "doge",
+                        "oldValue": null,
+                        "newValue": null,
+                        "children": [
+                            {
+                                "typeNode": "changed",
+                                "key": "wow",
+                                "oldValue": "",
+                                "newValue": "so much",
+                                "children": null
+                            }
+                        ]
+                    },
+                    {
+                        "typeNode": "unchanged",
+                        "key": "key",
+                        "oldValue": "value",
+                        "newValue": "value",
+                        "children": null
+                    },
+                    {
+                        "typeNode": "added",
+                        "key": "ops",
+                        "oldValue": null,
+                        "newValue": "vops",
+                        "children": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "typeNode": "nested",
+        "key": "group1",
+        "oldValue": null,
+        "newValue": null,
+        "children": [
+            {
+                "typeNode": "changed",
+                "key": "baz",
+                "oldValue": "bas",
+                "newValue": "bars",
+                "children": null
+            },
+            {
+                "typeNode": "unchanged",
+                "key": "foo",
+                "oldValue": "bar",
+                "newValue": "bar",
+                "children": null
+            },
+            {
+                "typeNode": "changed",
+                "key": "nest",
+                "oldValue": {
+                    "key": "value"
+                },
+                "newValue": "str",
+                "children": null
+            }
+        ]
+    },
+    {
+        "typeNode": "removed",
+        "key": "group2",
+        "oldValue": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        },
+        "newValue": null,
+        "children": null
+    },
+    {
+        "typeNode": "added",
+        "key": "group3",
+        "oldValue": null,
+        "newValue": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        },
+        "children": null
+    }
+]

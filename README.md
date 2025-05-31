@@ -30,3 +30,6 @@ composer install
 
 ## Use with formatter plain
 [![asciicast](https://asciinema.org/a/fyhp7Q1g3RYMRbODus6O0KWXU.svg)](https://asciinema.org/a/fyhp7Q1g3RYMRbODus6O0KWXU)
+
+## Use with formatter json
+[![asciicast](https://asciinema.org/a/hBXfWeV5BU1fSQnUZ0jIGBWmX.svg)](https://asciinema.org/a/hBXfWeV5BU1fSQnUZ0jIGBWmX)

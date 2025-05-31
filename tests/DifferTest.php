@@ -43,4 +43,13 @@ class DifferTest extends TestCase
         $expected2plain = file_get_contents(__DIR__ . "/fixtures/expected2plain.txt");
         $this->assertEquals($expected2plain, $result2plain);
     }
+
+    public function testJsonFormat(): void
+    {
+        $before = __DIR__ . "/fixtures/file1recursive.json";
+        $after = __DIR__ . "/fixtures/file2recursive.json";
+        $result = genDiff($before, $after, "json");
+        $expected = file_get_contents(__DIR__ . "/fixtures/expectedJson.txt");
+        $this->assertEquals($expected, $result);
+    }
 }
