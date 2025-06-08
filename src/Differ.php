@@ -5,10 +5,10 @@ namespace Differ\Differ;
 use function Differ\Parser\parse;
 use function Differ\Formatters\render;
 
-function genDiff(string $firstFilePath, string $secondFilePath, $format = "stylish")
+function genDiff(string $firstPath, string $secondPath, $format = "stylish")
 {
-    $firstArray = parse($firstFilePath);
-    $secondArray = parse($secondFilePath);
+    $firstArray = parse($firstPath);
+    $secondArray = parse($secondPath);
     $diff = makeDiff($firstArray, $secondArray);
     return render($diff, $format);
 }
