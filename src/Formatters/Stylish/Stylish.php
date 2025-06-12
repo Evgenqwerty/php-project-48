@@ -100,7 +100,11 @@ function renderNodesNested($data, $depth)
 function getValue($value, $depth)
 {
     if (is_null($value)) {
-        return 'null ';
+        return 'null';
+    }
+
+    if ($value === '') {
+        return ' ';
     }
     
     if (is_bool($value)) {
