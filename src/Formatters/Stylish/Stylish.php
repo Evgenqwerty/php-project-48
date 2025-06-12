@@ -46,7 +46,7 @@ function renderArray($array, $depth)
     $viewArray = array_map(function ($key) use ($array, $depth) {
         $prefix = getIndent($depth) . UNMODIFIED;
         $value = getValue($array[$key], $depth);
-        return "{$prefix}{$key}:" . ($value === '' ? '' : " $value");
+        return "{$prefix}{$key}: " . $value;
     }, $keys);
     $initialString = "{\n";
     $endString = "\n" . getIndent($depth) . "}";
@@ -103,14 +103,21 @@ function getValue($value, $depth)
         return 'null';
     }
     
-    switch (gettype($value)) {
-        case 'boolean':
-            return $value ? 'true' : 'false';
-        case 'array':
-            return renderArray($value, $depth + 1);
-        case 'object':
-            return renderArray((array)$value, $depth + 1);
-        default:
-            return $value;
+    if (is_bool($value)) {
+        return $value ? 'true' : 'false';
     }
+    
+    if (is_array($value)) {
+        return renderArray($value, $depth + 1);
+    }
+    
+    if (is_object($value)) {
+        return renderArray((array)$value, $depth + 1);
+    }
+    
+    if ($value === 0) {
+        return '0';
+    }
+    
+    return $value;
 }
