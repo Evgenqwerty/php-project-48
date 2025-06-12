@@ -106,18 +106,14 @@ function getValue($value, $depth)
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
     }
-    
     if (is_array($value)) {
         return renderArray($value, $depth + 1);
     }
-    
     if (is_object($value)) {
         return renderArray((array)$value, $depth + 1);
     }
-    
     if ($value === 0) {
         return '0';
     }
-    
     return $value;
 }

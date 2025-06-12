@@ -21,19 +21,15 @@ function makeDiff($before, $after)
         if (!property_exists($before, $key)) {
             return buildNode("added", $key, null, $after->$key);
         }
-        
         if (!property_exists($after, $key)) {
             return buildNode("removed", $key, $before->$key, null);
         }
-        
         if ($before->$key === $after->$key) {
             return buildNode("unchanged", $key, $before->$key, $after->$key);
         }
-        
         if (is_object($before->$key) && is_object($after->$key)) {
             return buildNode('nested', $key, null, null, makeDiff($before->$key, $after->$key));
         }
-        
         return buildNode("changed", $key, $before->$key, $after->$key);
     }, $unionKeys);
 }
