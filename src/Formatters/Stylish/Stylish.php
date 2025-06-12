@@ -65,7 +65,7 @@ function renderNodesRemoved($data, $depth)
 {
     $prefix = getIndent($depth) . DELETED;
     $value = getValue($data['oldValue'], $depth);
-    $view = "{$prefix}{$data['key']}:" . ($value === '' ? ' ' : " $value");
+    $view = "{$prefix}{$data['key']}:" . ($value === '' ? '' : " $value");
     return $view;
 }
 
