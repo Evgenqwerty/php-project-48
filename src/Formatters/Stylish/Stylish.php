@@ -65,7 +65,7 @@ function renderNodesRemoved($data, $depth)
 {
     $prefix = getIndent($depth) . DELETED;
     $value = getValue($data['oldValue'], $depth);
-    $view = "{$prefix}{$data['key']}:" . ($value === '' ? '' : " $value");
+    $view = "{$prefix}{$data['key']}:" . ($value === '' ? ' ' : " $value");
     return $view;
 }
 
@@ -73,7 +73,7 @@ function renderNodesAdded($data, $depth)
 {
     $prefix = getIndent($depth) . ADDED;
     $value = getValue($data['newValue'], $depth);
-    $view = "{$prefix}{$data['key']}:" . ($value === '' ? '' : " $value");
+    $view = "{$prefix}{$data['key']}:" . ($value === '' ? ' ' : " $value");
     return $view;
 }
 
@@ -81,7 +81,7 @@ function renderNodesUnchanged($data, $depth)
 {
     $prefix = getIndent($depth) . UNMODIFIED;
     $value = getValue($data['newValue'], $depth);
-    $view = "{$prefix}{$data['key']}:" . ($value === '' ? '' : " $value");
+    $view = "{$prefix}{$data['key']}:" . ($value === '' ? ' ' : " $value");
     return $view;
 }
 
@@ -103,10 +103,6 @@ function getValue($value, $depth)
         return 'null';
     }
 
-    if ($value === '') {
-        return ' ';
-    }
-    
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
     }
