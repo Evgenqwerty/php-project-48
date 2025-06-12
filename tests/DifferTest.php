@@ -2,54 +2,33 @@
 
 namespace Differ\Phpunit\Differ;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function Differ\Differ\genDiff;
 
 class DifferTest extends TestCase
 {
-    public function testDiffJson(): void
+    #[DataProvider('diffProvider')]
+    public function testDiff($expected, $result): void
     {
-        $expected = file_get_contents(__DIR__ . "/fixtures/expected.txt");
-        $before = __DIR__ . "/fixtures/file1.json";
-        $after = __DIR__ . "/fixtures/file2.json";
-        $result = genDiff($before, $after);
         $this->assertEquals($expected, $result);
     }
 
-    public function testDiffYaml(): void
+    public static function getFile($fileName)
     {
-        $expected = file_get_contents(__DIR__ . "/fixtures/expected.txt");
-        $before = __DIR__ . "/fixtures/file1.yml";
-        $after = __DIR__ . "/fixtures/file2.yml";
-        $result = genDiff($before, $after);
-        $this->assertEquals($expected, $result);
+        return __DIR__ . "/fixtures/$fileName";
     }
 
-    public function testRecursiveJson(): void
+    public static function diffProvider(): array
     {
-        $expected = file_get_contents(__DIR__ . "/fixtures/expectedRecursive.txt");
-        $before = __DIR__ . "/fixtures/file1recursive.json";
-        $after = __DIR__ . "/fixtures/file2recursive.json";
-        $result = genDiff($before, $after);
-        $this->assertEquals($expected, $result);
-    }
+        return [
+            'flat_json' => [file_get_contents(self::getFile('expected.txt')), genDiff(self::getFile('file1.json'), self::getFile('file2.json'))],
+            'flat_yaml' => [file_get_contents(self::getFile('expected.txt')), genDiff(self::getFile('file1.yml'), self::getFile('file2.yml'))],
+            'recursive_json' => [file_get_contents(self::getFile('expectedRecursive.txt')), genDiff(self::getFile('file1recursive.json'), self::getFile('file2recursive.json'))],
+            'plain_format' => [file_get_contents(self::getFile('expected2plain.txt')), genDiff(self::getFile('file1recursive.json'), self::getFile('file2recursive.json'), 'plain')],
+            'json_format' => [file_get_contents(self::getFile('expectedJson.txt')), genDiff(self::getFile('file1recursive.json'), self::getFile('file2recursive.json'), 'json')],
 
-    public function testPlainFormat(): void
-    {
-        $before = __DIR__ . "/fixtures/file1recursive.json";
-        $after = __DIR__ . "/fixtures/file2recursive.json";
-        $result2plain = genDiff($before, $after, "plain");
-        $expected2plain = file_get_contents(__DIR__ . "/fixtures/expected2plain.txt");
-        $this->assertEquals($expected2plain, $result2plain);
-    }
-
-    public function testJsonFormat(): void
-    {
-        $before = __DIR__ . "/fixtures/file1recursive.json";
-        $after = __DIR__ . "/fixtures/file2recursive.json";
-        $result = genDiff($before, $after, "json");
-        $expected = file_get_contents(__DIR__ . "/fixtures/expectedJson.txt");
-        $this->assertEquals($expected, $result);
+        ];
     }
 }

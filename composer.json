@@ -3,12 +3,12 @@
     "description": "difference calculator",
     "autoload": {
         "files":[
-            "src/Parser.php",
-            "src/Differ.php",
-            "src/formatters/render.php",
-            "src/formatters/json.php",
-            "src/formatters/stylish.php",
-            "src/formatters/plain.php"
+            "src/Parser/Parser.php",
+            "src/Differ/Differ.php",
+            "src/Formatters/Render.php",
+            "src/Formatters/Json/Json.php",
+            "src/Formatters/Stylish/Stylish.php",
+            "src/Formatters/Plain/Plain.php"
         ],
         "psr-4": {
             "Hexlet\\Code\\": "src/"
