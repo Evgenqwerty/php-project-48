@@ -46,7 +46,7 @@ function renderArray($array, $depth)
     $viewArray = array_map(function ($key) use ($array, $depth) {
         $prefix = getIndent($depth) . UNMODIFIED;
         $value = getValue($array[$key], $depth);
-        return "{$prefix}{$key}: $value";
+        return "{$prefix}{$key}:" . ($value === '' ? '' : " $value");
     }, $keys);
     $initialString = "{\n";
     $endString = "\n" . getIndent($depth) . "}";
@@ -99,6 +99,10 @@ function renderNodesNested($data, $depth)
 
 function getValue($value, $depth)
 {
+    if (is_null($value)) {
+        return 'null';
+    }
+    
     switch (gettype($value)) {
         case 'boolean':
             return $value ? 'true' : 'false';
@@ -106,8 +110,6 @@ function getValue($value, $depth)
             return renderArray($value, $depth + 1);
         case 'object':
             return renderArray((array)$value, $depth + 1);
-        case 'NULL':
-            return 'null';
         default:
             return $value;
     }
