@@ -1,6 +1,9 @@
 {
     "name": "hexlet/code",
     "description": "difference calculator",
+    "bin": [
+        "bin/gendiff"
+    ],
     "autoload": {
         "files":[
             "src/Parser/Parser.php",
