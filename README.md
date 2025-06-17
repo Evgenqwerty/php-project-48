@@ -6,7 +6,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Evgenqwerty_php-project-48&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Evgenqwerty_php-project-48)
 
 ## About:
-Second project on Hexlet by Ukhvatkin.J.V. Cli tool for watching differences between two files
+Second project on Hexlet by Ukhvatkin.E. Cli tool for watching differences between two files
 
 ## minimum system requirements:
 Composer version 2.8.5  
