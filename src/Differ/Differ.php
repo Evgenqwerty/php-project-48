@@ -5,7 +5,12 @@ namespace Differ\Differ;
 use function Differ\Parser\parse;
 use function Differ\Formatters\render;
 
-function genDiff(string $firstPath, string $secondPath, $format = "stylish")
+/**
+ * @param string $firstPath
+ * @param string $secondPath
+ * @param string $format
+ */
+function genDiff(string $firstPath, string $secondPath, string $format = "stylish"): string
 {
     $firstArray = parse($firstPath);
     $secondArray = parse($secondPath);
@@ -13,7 +18,12 @@ function genDiff(string $firstPath, string $secondPath, $format = "stylish")
     return render($diff, $format);
 }
 
-function makeDiff($before, $after)
+/**
+ * @param object $before
+ * @param object $after
+ * @return array<int, array<string, mixed>>
+ */
+function makeDiff(object $before, object $after): array
 {
     $unionKeys = array_unique(array_merge(array_keys((array)$before), array_keys((array)$after)));
     sort($unionKeys);
@@ -34,7 +44,15 @@ function makeDiff($before, $after)
     }, $unionKeys);
 }
 
-function buildNode($typeNode, $key, $oldValue, $newValue, $children = null)
+/**
+ * @param string $typeNode
+ * @param string $key
+ * @param mixed $oldValue
+ * @param mixed $newValue
+ * @param array<int, array<string, mixed>>|null $children
+ * @return array<string, mixed>
+ */
+function buildNode(string $typeNode, string $key, mixed $oldValue, mixed $newValue, ?array $children = null): array
 {
     $node = [
         'typeNode' => $typeNode,
