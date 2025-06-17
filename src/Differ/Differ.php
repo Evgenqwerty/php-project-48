@@ -25,9 +25,14 @@ function genDiff(string $firstPath, string $secondPath, string $format = "stylis
  */
 function makeDiff(object $before, object $after): array
 {
-    $unionKeys = array_unique(array_merge(array_keys((array)$before), array_keys((array)$after)));
-    // Заменяем sort() на не-мутирующую альтернативу
-    $sortedKeys = array_values(array_sort($unionKeys));
+    $unionKeys = array_unique(array_merge(
+        array_keys((array)$before),
+        array_keys((array)$after)
+    ));
+
+    // Создаем копию и сортируем её
+    $sortedKeys = array_values($unionKeys);
+    usort($sortedKeys, fn($a, $b) => strcmp($a, $b));
 
     return array_map(function ($key) use ($before, $after) {
         if (!property_exists($before, $key)) {
@@ -43,15 +48,7 @@ function makeDiff(object $before, object $after): array
             return buildNode('nested', $key, null, null, makeDiff($before->$key, $after->$key));
         }
         return buildNode("changed", $key, $before->$key, $after->$key);
-    }, $sortedKeys); // Используем отсортированный массив
-}
-
-// Вспомогательная функция для сортировки без мутации
-function array_sort(array $array): array
-{
-    $sorted = $array;
-    sort($sorted);
-    return $sorted;
+    }, $sortedKeys);
 }
 
 /**
