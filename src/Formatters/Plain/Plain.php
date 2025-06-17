@@ -7,112 +7,72 @@ const REMOVED = "Property '%s' was removed";
 const CHANGED = "Property '%s' was updated. From %s to %s";
 const VALUE_IS_ARRAY = "[complex value]";
 
-/**
- * @param array<int, array{
- *     typeNode: string,
- *     key: string,
- *     oldValue: mixed,
- *     newValue: mixed,
- *     children: array<int, array<mixed>>
- * }> $ast
- * @return string
- */
-function plain(array $ast): string
+function plain($ast)
 {
-    /** @var array<string> $result */
-    $result = [];
-
-    foreach ($ast as $item) {
-        $plainItem = getPlain($item, '');
-        if (is_array($plainItem)) {
-            $result = [...$result, ...$plainItem];
-        } elseif ($plainItem !== '') {
-            $result[] = $plainItem;
-        }
-    }
-
-    return implode("\n", $result);
+    $arr = array_map(function ($item) {
+        return getPlain($item, '');
+    }, $ast);
+    $arr = array_filter(array_flatten($arr));
+    return implode("\n", $arr);
 }
 
-/**
- * @param array{
- *     typeNode: string,
- *     key: string,
- *     oldValue: mixed,
- *     newValue: mixed,
- *     children: array<int, array<mixed>>
- * } $item
- * @param string $path
- * @return string|array<string>
- */
-function getPlain(array $item, string $path): string|array
+function getPlain($item, $path)
 {
     [
         'typeNode' => $type,
-        'key' => $key,
+        'key' =>  $key,
         'oldValue' => $before,
         'newValue' => $after,
         'children' => $children
     ] = $item;
 
-    $beforeStr = getValue($before);
-    $afterStr = getValue($after);
+    $before = getValue($before);
+    $after = getValue($after);
     $name = "{$path}{$key}";
     $nameForChildren = "{$path}{$key}.";
-
     switch ($type) {
         case 'nested':
-            /** @var array<string> $nestedResult */
-            $nestedResult = [];
-            foreach ($children as $child) {
-                $childResult = getPlain($child, $nameForChildren);
-                if (is_array($childResult)) {
-                    $nestedResult = [...$nestedResult, ...$childResult];
-                } else {
-                    $nestedResult[] = $childResult;
-                }
-            }
-            return $nestedResult;
+            return array_map(function ($item) use ($nameForChildren) {
+                return getPlain($item, $nameForChildren);
+            }, $children);
 
         case 'changed':
-            return sprintf(CHANGED, $name, $beforeStr, $afterStr);
+            return sprintf(CHANGED, $name, $before, $after);
 
         case 'removed':
             return sprintf(REMOVED, $name);
 
         case 'added':
-            return sprintf(ADDED, $name, $afterStr);
-
+            return sprintf(ADDED, $name, $after);
+    }
+}
+function getValue($value)
+{
+    switch (gettype($value)) {
+        case 'boolean':
+            return $value ? 'true' : 'false';
+        case 'array':
+            return VALUE_IS_ARRAY;
+        case 'object':
+            return VALUE_IS_ARRAY;
+        case 'NULL':
+            return 'null';
+        case 'string':
+            return "'" . $value . "'";
         default:
-            return '';
+            return $value;
     }
 }
 
-/**
- * @param mixed $value
- * @return string
- */
-function getValue(mixed $value): string
+function array_flatten($array)
 {
-    if (is_bool($value)) {
-        return $value ? 'true' : 'false';
+    $result = array();
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            $result = array_merge($result, array_flatten($value));
+        } else {
+            $result = array_merge($result, array($key => $value));
+        }
     }
-
-    if ($value === null) {
-        return 'null';
-    }
-
-    if (is_array($value) || is_object($value)) {
-        return VALUE_IS_ARRAY;
-    }
-
-    if (is_string($value)) {
-        return "'$value'";
-    }
-
-    if (is_int($value) || is_float($value)) {
-        return (string)$value;
-    }
-
-    return '';
+    return $result;
 }
