@@ -7,6 +7,19 @@ const REMOVED = "Property '%s' was removed";
 const CHANGED = "Property '%s' was updated. From %s to %s";
 const VALUE_IS_ARRAY = "[complex value]";
 
+function array_flatten($array)
+{
+    $result = array();
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            $result = array_merge($result, array_flatten($value));
+        } else {
+            $result = array_merge($result, array($key => $value));
+        }
+    }
+    return $result;
+}
+
 /**
  * @param array<int, array{
  *     typeNode: string,
@@ -19,19 +32,12 @@ const VALUE_IS_ARRAY = "[complex value]";
  */
 function plain(array $ast): string
 {
-    /** @var array<string> $result */
-    $result = [];
-
-    foreach ($ast as $item) {
-        $plainItem = getPlain($item, '');
-        if (is_array($plainItem)) {
-            $result = [...$result, ...$plainItem];
-        } elseif ($plainItem !== '') {
-            $result[] = $plainItem;
-        }
-    }
-
-    return implode("\n", $result);
+    $arr = array_map(function ($item) {
+        return getPlain($item, '');
+    }, $ast);
+    $arr = array_flatten($arr);
+    $arr = array_filter($arr, fn($line) => $line !== null && $line !== '');
+    return implode("\n", $arr);
 }
 
 /**
