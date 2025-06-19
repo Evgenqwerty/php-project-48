@@ -10,7 +10,7 @@ use function Differ\Formatters\render;
  * @param string $secondPath
  * @param string $format
  */
-function genDiff(string $firstPath, string $secondPath, string $format = "stylish"): string
+function genDiff(string $firstPath, string $secondPath, string $format = "stylish"): string|false
 {
     $firstArray = parse($firstPath);
     $secondArray = parse($secondPath);

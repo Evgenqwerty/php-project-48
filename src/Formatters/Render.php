@@ -11,12 +11,15 @@ use function Differ\Formatters\Stylish\stylish;
  * @param string $format
  * @return string
  */
-function render(array $arr, string $format): string
+function render(array $arr, string $format): string|false
 {
     $formats = [
         'stylish' => fn($ast) => stylish($ast),
         'plain' => fn($ast) => plain($ast),
         'json' => fn($ast) => json($ast)
     ];
+    if (!array_key_exists($format, $formats)) {
+        throw new \InvalidArgumentException("Unknown format: $format");
+    }
     return $formats[$format]($arr);
 }

@@ -7,7 +7,11 @@ const REMOVED = "Property '%s' was removed";
 const CHANGED = "Property '%s' was updated. From %s to %s";
 const VALUE_IS_ARRAY = "[complex value]";
 
-function array_flatten($array)
+/**
+ * @param iterable<mixed> $array  // "mixed" — если элементы могут быть любого типа
+ * @return array<mixed>          // возвращает массив с элементами любого типа
+ */
+function array_flatten(iterable $array): array
 {
     $result = array();
     foreach ($array as $key => $value) {
