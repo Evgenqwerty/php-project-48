@@ -132,7 +132,9 @@ function renderNodesUnchanged(array $data, int $depth): string
 function renderNodesNested(array $data, int $depth): string
 {
     $prefix = getIndent($depth) . UNMODIFIED;
-    $children = isset($data['children']) && is_array($data['children']) && array_is_list($data['children']) ? $data['children'] : [];
+    $children = isset($data['children'])
+    && is_array($data['children'])
+    && array_is_list($data['children']) ? $data['children'] : [];
     $body = getBody($children, $depth + 1);
     $key = isset($data['key']) ? toStringSafe($data['key']) : '';
     $lines = [
@@ -150,7 +152,11 @@ function renderNodesNested(array $data, int $depth): string
  */
 function toStringSafe(mixed $value): string
 {
-    if (is_string($value) || is_int($value) || is_float($value) || is_bool($value) || is_null($value)) {
+    if (is_string($value) ||
+        is_int($value) ||
+        is_float($value) ||
+        is_bool($value) ||
+        is_null($value)) {
         return strval($value);
     }
     return '';
