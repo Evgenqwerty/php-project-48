@@ -152,11 +152,7 @@ function renderNodesNested(array $data, int $depth): string
  */
 function toStringSafe(mixed $value): string
 {
-    if (is_string($value) ||
-        is_int($value) ||
-        is_float($value) ||
-        is_bool($value) ||
-        is_null($value)) {
+    if (is_string($value) || is_int($value) || is_float($value) || is_bool($value) || is_null($value)) {
         return strval($value);
     }
     return '';
