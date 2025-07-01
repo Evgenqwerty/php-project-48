@@ -15,7 +15,7 @@ function array_flatten(array $array): array
 {
     return array_reduce(
         $array,
-        fn($acc, $item) => is_array($item)
+        fn(array $acc, mixed $item): array => is_array($item)
             ? [...$acc, ...array_flatten($item)]
             : [...$acc, $item],
         []
@@ -35,7 +35,7 @@ function array_flatten(array $array): array
 function plain(array $ast): string
 {
     $lines = array_map(
-        fn(array $item): array => getPlain($item, ''),
+        fn(array $item): array => getPlain($item),
         $ast
     );
 
@@ -52,17 +52,17 @@ function plain(array $ast): string
  *     oldValue: mixed,
  *     newValue: mixed,
  *     children?: array<int, array<mixed>>
- * } $item
+ * } $node
  * @param string $path
  * @return array<string>
  */
-function getPlain(array $item, string $path): array
+function getPlain(array $node, string $path = ''): array
 {
-    $type = $item['typeNode'] ?? '';
-    $key = $item['key'] ?? '';
-    $before = $item['oldValue'] ?? null;
-    $after = $item['newValue'] ?? null;
-    $children = $item['children'] ?? [];
+    $type = $node['typeNode'];
+    $key = $node['key'];
+    $before = $node['oldValue'];
+    $after = $node['newValue'];
+    $children = $node['children'] ?? [];
 
     $beforeStr = getValue($before);
     $afterStr = getValue($after);
