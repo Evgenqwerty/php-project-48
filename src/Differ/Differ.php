@@ -25,35 +25,30 @@ function makeDiff(object $before, object $after): array
 
     $unionKeys = array_unique([...$beforeKeys, ...$afterKeys]);
 
-    // Сортировка без мутации - создаем новый отсортированный массив
+    // Функциональная сортировка без мутаций и циклов
     $sortedKeys = array_reduce(
         $unionKeys,
-        function ($carry, $item) {
-            $insertPos = 0;
-            while ($insertPos < count($carry) && strcmp($carry[$insertPos], $item) < 0) {
-                $insertPos++;
-            }
-            array_splice($carry, $insertPos, 0, $item);
-            return $carry;
+        function ($acc, $key) {
+            return array_merge(
+                array_filter($acc, fn($k) => strcmp($k, $key) < 0),
+                [$key],
+                array_filter($acc, fn($k) => strcmp($k, $key) >= 0)
+            );
         },
         []
     );
 
-    return array_map(function ($key) use ($before, $after) {
-        if (!property_exists($before, $key)) {
-            return buildNode("added", $key, null, $after->$key);
-        }
-        if (!property_exists($after, $key)) {
-            return buildNode("removed", $key, $before->$key, null);
-        }
-        if ($before->$key === $after->$key) {
-            return buildNode("unchanged", $key, $before->$key, $after->$key);
-        }
-        if (is_object($before->$key) && is_object($after->$key)) {
-            return buildNode('nested', $key, null, null, makeDiff($before->$key, $after->$key));
-        }
-        return buildNode("changed", $key, $before->$key, $after->$key);
-    }, $sortedKeys);
+    return array_map(
+        fn($key) => match (true) {
+            !property_exists($before, $key) => buildNode("added", $key, null, $after->$key),
+            !property_exists($after, $key) => buildNode("removed", $key, $before->$key, null),
+            $before->$key === $after->$key => buildNode("unchanged", $key, $before->$key, $after->$key),
+            is_object($before->$key) && is_object($after->$key) =>
+            buildNode('nested', $key, null, null, makeDiff($before->$key, $after->$key)),
+            default => buildNode("changed", $key, $before->$key, $after->$key)
+        },
+        $sortedKeys
+    );
 }
 
 function buildNode(string $typeNode, string $key, mixed $oldValue, mixed $newValue, ?array $children = null): array
