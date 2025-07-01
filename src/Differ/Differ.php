@@ -30,9 +30,9 @@ function makeDiff(object $before, object $after): array
         array_keys((array)$after)
     ));
 
-    // Создаем копию и сортируем её
+    // Сортируем ключи без мутации исходного массива
     $sortedKeys = array_values($unionKeys);
-    usort($sortedKeys, fn($a, $b) => strcmp($a, $b));
+    sort($sortedKeys);
 
     return array_map(function ($key) use ($before, $after) {
         if (!property_exists($before, $key)) {
