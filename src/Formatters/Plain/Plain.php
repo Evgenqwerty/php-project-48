@@ -8,20 +8,21 @@ const CHANGED = "Property '%s' was updated. From %s to %s";
 const VALUE_IS_ARRAY = "[complex value]";
 
 /**
- * @param iterable<mixed> $array  // "mixed" — если элементы могут быть любого типа
- * @return array<mixed>          // возвращает массив с элементами любого типа
+ * @param iterable<mixed> $array
+ * @return array<mixed>
  */
 function array_flatten(iterable $array): array
 {
-    $result = array();
-    foreach ($array as $key => $value) {
-        if (is_array($value)) {
-            $result = array_merge($result, array_flatten($value));
-        } else {
-            $result = array_merge($result, array($key => $value));
-        }
-    }
-    return $result;
+    return array_reduce(
+        $array,
+        function ($acc, $item) {
+            if (is_array($item)) {
+                return array_merge($acc, array_flatten($item));
+            }
+            return array_merge($acc, [$item]);
+        },
+        []
+    );
 }
 
 /**
@@ -36,12 +37,15 @@ function array_flatten(iterable $array): array
  */
 function plain(array $ast): string
 {
-    $arr = array_map(function ($item) {
-        return getPlain($item, '');
-    }, $ast);
-    $arr = array_flatten($arr);
-    $arr = array_filter($arr, fn($line) => $line !== null && $line !== '');
-    return implode("\n", $arr);
+    $processed = array_map(
+        fn($item) => getPlain($item, ''),
+        $ast
+    );
+
+    $flattened = array_flatten($processed);
+    $filtered = array_filter($flattened, fn($line) => $line !== null && $line !== '');
+
+    return implode("\n", $filtered);
 }
 
 /**
@@ -53,9 +57,9 @@ function plain(array $ast): string
  *     children: array<int, array<mixed>>
  * } $item
  * @param string $path
- * @return string|array<string>
+ * @return array<string>
  */
-function getPlain(array $item, string $path): string|array
+function getPlain(array $item, string $path): array
 {
     [
         'typeNode' => $type,
@@ -70,32 +74,19 @@ function getPlain(array $item, string $path): string|array
     $name = "{$path}{$key}";
     $nameForChildren = "{$path}{$key}.";
 
-    switch ($type) {
-        case 'nested':
-            /** @var array<string> $nestedResult */
-            $nestedResult = [];
-            foreach ($children as $child) {
-                $childResult = getPlain($child, $nameForChildren);
-                if (is_array($childResult)) {
-                    $nestedResult = [...$nestedResult, ...$childResult];
-                } else {
-                    $nestedResult[] = $childResult;
-                }
-            }
-            return $nestedResult;
-
-        case 'changed':
-            return sprintf(CHANGED, $name, $beforeStr, $afterStr);
-
-        case 'removed':
-            return sprintf(REMOVED, $name);
-
-        case 'added':
-            return sprintf(ADDED, $name, $afterStr);
-
-        default:
-            return '';
-    }
+    return match ($type) {
+        'nested' => array_merge(
+            [],
+            ...array_map(
+                fn($child) => getPlain($child, $nameForChildren),
+                $children
+            )
+        ),
+        'changed' => [sprintf(CHANGED, $name, $beforeStr, $afterStr)],
+        'removed' => [sprintf(REMOVED, $name)],
+        'added' => [sprintf(ADDED, $name, $afterStr)],
+        default => ['']
+    };
 }
 
 /**
@@ -104,25 +95,12 @@ function getPlain(array $item, string $path): string|array
  */
 function getValue(mixed $value): string
 {
-    if (is_bool($value)) {
-        return $value ? 'true' : 'false';
-    }
-
-    if ($value === null) {
-        return 'null';
-    }
-
-    if (is_array($value) || is_object($value)) {
-        return VALUE_IS_ARRAY;
-    }
-
-    if (is_string($value)) {
-        return "'$value'";
-    }
-
-    if (is_int($value) || is_float($value)) {
-        return (string)$value;
-    }
-
-    return '';
+    return match (true) {
+        is_bool($value) => $value ? 'true' : 'false',
+        $value === null => 'null',
+        is_array($value) || is_object($value) => VALUE_IS_ARRAY,
+        is_string($value) => "'$value'",
+        is_int($value) || is_float($value) => (string)$value,
+        default => ''
+    };
 }
