@@ -28,27 +28,31 @@ function stylish(array $array): string
  */
 function getBody(array $array, int $depth = 0): string
 {
-    $bodyDiff = array_reduce($array, function (array $acc, array $data) use ($depth) {
+    $bodyDiff = array_map(function (array $data) use ($depth) {
         switch ($data['typeNode']) {
             case 'changed':
-                $acc[] = renderNodesRemoved($data, $depth);
-                $acc[] = renderNodesAdded($data, $depth);
-                break;
+                return [
+                    renderNodesRemoved($data, $depth),
+                    renderNodesAdded($data, $depth)
+                ];
             case 'unchanged':
-                $acc[] = renderNodesUnchanged($data, $depth);
-                break;
+                return renderNodesUnchanged($data, $depth);
             case 'removed':
-                $acc[] = renderNodesRemoved($data, $depth);
-                break;
+                return renderNodesRemoved($data, $depth);
             case 'added':
-                $acc[] = renderNodesAdded($data, $depth);
-                break;
+                return renderNodesAdded($data, $depth);
             case 'nested':
-                $acc[] = renderNodesNested($data, $depth);
+                return renderNodesNested($data, $depth);
+            default:
+                return '';
         }
-        return $acc;
+    }, $array);
+
+    $flattened = array_reduce($bodyDiff, function (array $acc, $item) {
+        return array_merge($acc, is_array($item) ? $item : [$item]);
     }, []);
-    return implode("\n", $bodyDiff);
+
+    return implode("\n", $flattened);
 }
 
 /**
