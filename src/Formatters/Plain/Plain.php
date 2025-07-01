@@ -28,7 +28,7 @@ function array_flatten(array $array): array
  *     key: string,
  *     oldValue: mixed,
  *     newValue: mixed,
- *     children: array<int, array<mixed>>
+ *     children?: array<int, array<mixed>>
  * }> $ast
  * @return string
  */
@@ -51,20 +51,18 @@ function plain(array $ast): string
  *     key: string,
  *     oldValue: mixed,
  *     newValue: mixed,
- *     children: array<int, array<mixed>>
+ *     children?: array<int, array<mixed>>
  * } $item
  * @param string $path
  * @return array<string>
  */
 function getPlain(array $item, string $path): array
 {
-    [
-        'typeNode' => $type,
-        'key' => $key,
-        'oldValue' => $before,
-        'newValue' => $after,
-        'children' => $children
-    ] = $item;
+    $type = $item['typeNode'] ?? '';
+    $key = $item['key'] ?? '';
+    $before = $item['oldValue'] ?? null;
+    $after = $item['newValue'] ?? null;
+    $children = $item['children'] ?? [];
 
     $beforeStr = getValue($before);
     $afterStr = getValue($after);
