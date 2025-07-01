@@ -58,10 +58,10 @@ function plain(array $ast): string
  */
 function getPlain(array $node, string $path = ''): array
 {
-    $type = $node['typeNode'];
-    $key = $node['key'];
-    $before = $node['oldValue'];
-    $after = $node['newValue'];
+    $type = $node['typeNode'] ?? '';
+    $key = $node['key'] ?? '';
+    $before = $node['oldValue'] ?? null;
+    $after = $node['newValue'] ?? null;
     $children = $node['children'] ?? [];
 
     $beforeStr = getValue($before);
