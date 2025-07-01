@@ -8,19 +8,16 @@ const CHANGED = "Property '%s' was updated. From %s to %s";
 const VALUE_IS_ARRAY = "[complex value]";
 
 /**
- * @param iterable<mixed> $array
+ * @param array<mixed> $array
  * @return array<mixed>
  */
-function array_flatten(iterable $array): array
+function array_flatten(array $array): array
 {
     return array_reduce(
         $array,
-        function ($acc, $item) {
-            if (is_array($item)) {
-                return array_merge($acc, array_flatten($item));
-            }
-            return array_merge($acc, [$item]);
-        },
+        fn($acc, $item) => is_array($item)
+            ? [...$acc, ...array_flatten($item)]
+            : [...$acc, $item],
         []
     );
 }
@@ -37,13 +34,13 @@ function array_flatten(iterable $array): array
  */
 function plain(array $ast): string
 {
-    $processed = array_map(
-        fn($item) => getPlain($item, ''),
+    $lines = array_map(
+        fn(array $item): array => getPlain($item, ''),
         $ast
     );
 
-    $flattened = array_flatten($processed);
-    $filtered = array_filter($flattened, fn($line) => $line !== null && $line !== '');
+    $flattened = array_flatten($lines);
+    $filtered = array_filter($flattened, fn($line) => $line !== '');
 
     return implode("\n", $filtered);
 }
@@ -78,7 +75,7 @@ function getPlain(array $item, string $path): array
         'nested' => array_merge(
             [],
             ...array_map(
-                fn($child) => getPlain($child, $nameForChildren),
+                fn(array $child): array => getPlain($child, $nameForChildren),
                 $children
             )
         ),
