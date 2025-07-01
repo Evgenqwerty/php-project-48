@@ -35,12 +35,7 @@ function array_flatten(array $array): array
 function plain(array $ast): string
 {
     $lines = array_map(
-        function (array $item): array {
-            if (!isset($item['typeNode'], $item['key'], $item['oldValue'], $item['newValue'])) {
-                return [''];
-            }
-            return getPlain($item);
-        },
+        fn(array $item): array => getPlain($item),
         $ast
     );
 
