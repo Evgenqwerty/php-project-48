@@ -46,13 +46,7 @@ function plain(array $ast): string
 }
 
 /**
- * @param array{
- *     typeNode: string,
- *     key: string,
- *     oldValue: mixed,
- *     newValue: mixed,
- *     children?: array<int, array<mixed>>
- * } $node
+ * @param array $node
  * @param string $path
  * @return array<string>
  */
